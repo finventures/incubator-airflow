@@ -774,7 +774,7 @@ def webserver(args):
             '-n', 'airflow-webserver',
             '-p', str(pid),
             '-c', 'airflow.www.gunicorn_config',
-            '--forwarded-allow-ips', "*"
+            '--forwarded-allow-ips=*'
         ]
 
         if args.access_logfile:
