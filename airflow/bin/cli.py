@@ -838,6 +838,8 @@ def webserver(args):
             stdout.close()
             stderr.close()
         else:
+            print "nodaemon"
+            print run_args
             gunicorn_master_proc = subprocess.Popen(run_args)
 
             signal.signal(signal.SIGINT, kill_proc)
