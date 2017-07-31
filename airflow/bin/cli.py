@@ -951,6 +951,7 @@ def worker(args):
 
 
 def initdb(args):  # noqa
+    print("SID TEST")
     print("DB: " + repr(settings.engine.url))
     db_utils.initdb()
     print("Done.")
