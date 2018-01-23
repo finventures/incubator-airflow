@@ -765,8 +765,6 @@ def webserver(args):
                 =================================================================\
             '''.format(**locals())))
 
-        
-        
         run_args = [
             'gunicorn',
             '-w', str(num_workers),
@@ -778,8 +776,7 @@ def webserver(args):
             '-c', 'airflow.www.gunicorn_config',
             '--forwarded-allow-ips=*'
         ]
-        print("args")
-        print(run_args)
+
         if args.access_logfile:
             run_args += ['--access-logfile', str(args.access_logfile)]
 
@@ -810,7 +807,6 @@ def webserver(args):
                     time.sleep(1)
 
         if args.daemon:
-            print("with daemon")
             base, ext = os.path.splitext(pid)
             ctx = daemon.DaemonContext(
                 pidfile=TimeoutPIDLockFile(base + "-monitor" + ext, -1),
@@ -949,7 +945,6 @@ def worker(args):
 
 
 def initdb(args):  # noqa
-    print("SID TEST")
     print("DB: " + repr(settings.engine.url))
     db_utils.initdb()
     print("Done.")
