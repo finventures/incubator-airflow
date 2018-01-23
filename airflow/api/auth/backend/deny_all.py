@@ -12,18 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest
+from functools import wraps
+from flask import Response
 
-from airflow.exceptions import AirflowException
-from airflow.utils import logging as logging_utils
-from datetime import datetime, timedelta
+client_auth = None
 
-class Logging(unittest.TestCase):
 
-    def test_get_log_filename(self):
-        dag_id = 'dag_id'
-        task_id = 'task_id'
-        execution_date = datetime(2017, 1, 1, 0, 0, 0)
-        try_number = 0
-        filename = logging_utils.get_log_filename(dag_id, task_id, execution_date, try_number)
-        self.assertEqual(filename, 'dag_id/task_id/2017-01-01T00:00:00/1.log')
+def init_app(app):
+    pass
+
+
+def requires_authentication(function):
+    @wraps(function)
+    def decorated(*args, **kwargs):
+        return Response("Forbidden", 403)
+
+    return decorated
